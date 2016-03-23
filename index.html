@@ -8,8 +8,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.css">
 <style>
 	
-	html { box-sizing: border-box; }
-	*, *:before, *:after { box-sizing: inherit; }
+	*,
+	*::before,
+	*::after {
+	-webkit-box-sizing: border-box;
+	 -khtml-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		 -o-box-sizing: border-box;
+			box-sizing: border-box;
+	}
 	
 	html,
 	body { overflow: hidden; }
@@ -22,6 +30,7 @@
 		font: 400 1.6rem/1.4 "Ubuntu Mono", monospace, serif; /* Use `em` if you want the property to scale according to its font size and `rem` for everything else. */
 		min-height: 100%;
 		background: #69D2E7;
+		padding: 1rem;
 	}
 	
 	a,
@@ -79,6 +88,11 @@
 		text-transform: capitalize;
 		line-height: 1;
 	}
+	@media all and (max-width: 48em) {
+		[result] {
+			top: 25% !important;
+		}
+	}
 	
 	[center] {
 		position: absolute;
@@ -124,8 +138,10 @@
 	
 	p {
 		font-size: 2rem;
+		line-height: 1.2;
 		text-align: center;
 		background: #fff;
+		width: 80%;
 		margin: 0;
 		padding: 1rem 1.5rem;
 		border-radius: .5rem;
@@ -134,9 +150,9 @@
 		left: 50%;
 		-webkit-transform: translateX(-50%);
 		   -moz-transform: translateX(-50%);
-		    -ms-transform: translateX(-50%);
-		     -o-transform: translateX(-50%);
-		        transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			 -o-transform: translateX(-50%);
+				transform: translateX(-50%);
 		pointer-events: none;
 		-webkit-touch-callout: none;
 		  -webkit-user-select: none;
@@ -147,6 +163,12 @@
 	}
 	p b { font-size: 2.6rem; }
 	
+	@media all and (min-width: 48em) {
+		p {
+			width: auto;
+		}
+	}
+	
 </style>
 </head>
 <body>
@@ -156,8 +178,7 @@
 <div result center fade="visible"></div>
 
 <p>
-	<b><a href="https://github.com/mhulse/wikipedia-word-mashup">Rock Band Name Generator!!!</a></b>
-	<!--<b><a href="https://www.wikipedia.org/">Wikipedia</a> Word Mashup!</b>-->
+	<b>Rock Band Name Generator!!!</b>
 	<br>
 	Type a number between 1 and 5 …
 	<br>
