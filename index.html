@@ -38,6 +38,16 @@
 		text-decoration: underline;
 	}
 	
+	::-moz-selection {
+		background: rgba(255, 255, 0, 0.55);
+		text-shadow: none;
+	}
+
+	::selection {
+		background: rgba(255, 255, 0, 0.55);
+		text-shadow: none;
+	}
+	
 	[number] {
 		background: rgba(0, 0, 0, .75);
 		opacity: 0;
@@ -113,10 +123,11 @@
 	}
 	
 	p {
+		font-size: 2rem;
 		text-align: center;
 		background: #fff;
 		margin: 0;
-		padding: .5rem 1rem;
+		padding: 1rem 1.5rem;
 		border-radius: .5rem;
 		position: absolute;
 		bottom: 4rem;
@@ -134,6 +145,7 @@
 		      -ms-user-select: none;
 		          user-select: none;
 	}
+	p b { font-size: 2.6rem; }
 	
 </style>
 </head>
@@ -144,14 +156,14 @@
 <div result center fade="visible"></div>
 
 <p>
-	<b>Rock Band Name Generator!!!</b>
+	<b><a href="https://github.com/mhulse/wikipedia-word-mashup">Rock Band Name Generator!!!</a></b>
 	<!--<b><a href="https://www.wikipedia.org/">Wikipedia</a> Word Mashup!</b>-->
 	<br>
-	Type a number between 1 and 5
+	Type a number between 1 and 5 …
 	<br>
-	Type “h” for a brief history
+	type “h” for a brief history.
 	<br>
-	<a href="https://github.com/mhulse/wikipedia-word-mashup">More info</a>
+	Select all to copy your new name!
 </p>
 
 <ol history center fade></ol>

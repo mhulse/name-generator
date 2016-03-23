@@ -1,4 +1,4 @@
-# Wikipedia word mashup
+# Wikipedia Word Mashup
 
 **A.K.A. “Rock Band Name Generator!!!”**
 
