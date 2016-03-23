@@ -177,7 +177,7 @@
 
 <div result center fade="visible"></div>
 
-<p>
+<p fade>
 	<b>Rock Band Name Generator!!!</b>
 	<br>
 	Type a number between 1 and 5 …
@@ -414,6 +414,12 @@
 			}
 			
 		});
+		
+	});
+	
+	$(window).load(function() {
+		
+		$('p').attr('fade', 'visible');
 		
 	});
 	
