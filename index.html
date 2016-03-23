@@ -237,7 +237,7 @@
 					var title = page.title.capitalize();
 					var word;
 					var uri = 'http://en.wikipedia.org/?curid=';
-					var find = ['(', ')', '-', ',', '.', '"', 'Disambiguation', ':', '–'];
+					var find = ['(', ')', '-', ',', '.', '"', 'Disambiguation', ':', '–', '&'];
 					var i;
 					var l;
 					
@@ -246,6 +246,12 @@
 						title = title.replace(find[i], '');
 						
 					}
+					
+					title = title
+						// Opening singles:
+						.replace(/(^|[-\u2014\s(\["])'/g, "$1\u2018")
+						// Closing singles & apostrophes:
+						.replace(/'/g, "\u2019");
 					
 					title = title.split(' ');
 					word = title[Math.floor(Math.random() * title.length)]
