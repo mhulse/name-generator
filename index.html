@@ -249,9 +249,9 @@
 					
 					title = title
 						// Opening singles:
-						.replace(/(^|[-\u2014\s(\["])'/g, "$1\u2018")
+						.replace(/(^|[-\u2014\s(\["])'/g, '$1\u2018')
 						// Closing singles & apostrophes:
-						.replace(/'/g, "\u2019");
+						.replace(/'/g, '\u2019');
 					
 					title = title.split(' ');
 					word = title[Math.floor(Math.random() * title.length)]
