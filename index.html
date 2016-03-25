@@ -3,7 +3,7 @@
 <head>
 <meta charset=utf-8>
 <meta name="viewport" content="width=device-width">
-<title>Wikipedia Startup Names</title>
+<title>Random Name Generator</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.css">
 <style>
@@ -172,23 +172,56 @@
 		p br { display: none; }
 	}
 	
+	[off] {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	
 </style>
 </head>
 <body>
 
+<div about off>
+	<span>Agency</span> Name Generator,
+	<span>Animal</span> Name Generator,
+	<span>Baby</span> Name Generator,
+	<span>Band</span> Name Generator,
+	<span>Blog</span> Name Generator,
+	<span>Business</span> Name Generator,
+	<span>Business</span> Name Generator,
+	<span>Character</span> Name Generator,
+	<span>Cool</span> Name Generator,
+	<span>Domain</span> Name Generator,
+	<span>Encyclopedia</span> Name Generator,
+	<span>Fake</span> Name Generator,
+	<span>Fantasy</span> Name Generator,
+	<span>Female</span> Name Generator,
+	<span>Guild</span> Name Generator,
+	<span>Hipster</span> Name Generator,
+	<span>Male</span> Name Generator,
+	<span>Modern</span> Name Generator,
+	<span>Quick</span> Name Generator,
+	<span>Random</span> Name Generator,
+	<span>Repo</span> Name Generator,
+	<span>Rock Band</span> Name Generator,
+	<span>Rock Star</span> Name Generator,
+	<span>Shop</span> Name Generator,
+	<span>Startup</span> Name Generator,
+	<span>Store</span> Name Generator,
+	<span>Unique</span> Name Generator,
+	<span>User</span> Name Generator,
+	<span>Wikipedia</span> Name Generator
+</div>
+
 <div number fade><span center></span></div>
 
 <div result center fade="visible"></div>
-
-<p fade>
-	<b>Rock Band Name Generator!!!</b>
-	<br>
-	Type a number between 1 and 5 …
-	<br>
-	type “h” for a brief history.
-	<br>
-	Select all to copy your new name!
-</p>
 
 <ol history center fade></ol>
 
@@ -426,9 +459,31 @@
 		
 	});
 	
-	$(window).load(function() {
+	$(function() {
 		
-		$('p').attr('fade', 'visible');
+		var $about = $('[about]');
+		var $p = $('<p fade />');
+		var html = [
+			'<b><span>Random</span> Name Generator!</b>',
+			'<br>',
+			'Type a number between 1 and 5 …',
+			'<br>',
+			'type “h” for a brief history.',
+			'<br>',
+			'Select all to copy your new name!'
+		].join('');
+		
+		$p
+			.appendTo('body')
+			.html(html)
+			.find('span')
+			.text($('span:nth-child(' + Math.floor((Math.random() * $about.children('span').length) + 1 ) + ')', $about).text());
+		
+		$(window).load(function() {
+			
+			$p.attr('fade', 'visible');
+			
+		});
 		
 	});
 	
