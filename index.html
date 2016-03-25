@@ -14,9 +14,9 @@
 	-webkit-box-sizing: border-box;
 	 -khtml-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
-		-ms-box-sizing: border-box;
-		 -o-box-sizing: border-box;
-			box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	     -o-box-sizing: border-box;
+	        box-sizing: border-box;
 	}
 	
 	html,
@@ -67,12 +67,6 @@
 		left: 0;
 		z-index: 1;
 		pointer-events: none;
-		-webkit-touch-callout: none;
-		  -webkit-user-select: none;
-		   -khtml-user-select: none;
-		     -moz-user-select: none;
-		      -ms-user-select: none;
-		          user-select: none;
 	}
 	
 	[number] > span {
@@ -96,12 +90,6 @@
 		text-transform: lowercase;
 		display: block;
 		margin-top: 1rem;
-		-webkit-touch-callout: none;
-		  -webkit-user-select: none;
-		   -khtml-user-select: none;
-		     -moz-user-select: none;
-		      -ms-user-select: none;
-		          user-select: none;
 	}
 	
 	[center] {
@@ -156,40 +144,7 @@
 	[history] li { margin-bottom: 1rem; }
 	[history] li:last-child { margin-bottom: 0; }
 	
-	p {
-		font-size: 2rem;
-		line-height: 1.2;
-		text-align: center;
-		background: #fff;
-		width: 80%;
-		margin: 0;
-		padding: 1rem 1.5rem;
-		border-radius: .5rem;
-		position: absolute;
-		bottom: 4rem;
-		left: 50%;
-		-webkit-transform: translateX(-50%);
-		   -moz-transform: translateX(-50%);
-			-ms-transform: translateX(-50%);
-			 -o-transform: translateX(-50%);
-				transform: translateX(-50%);
-		-webkit-touch-callout: none;
-		  -webkit-user-select: none;
-		   -khtml-user-select: none;
-		     -moz-user-select: none;
-		      -ms-user-select: none;
-		          user-select: none;
-	}
-	p b { font-size: 2.6rem; }
-	
-	@media all and (min-width: 48em) {
-		p {
-			width: auto;
-		}
-	}
-	@media all and (max-width: 48em) {
-		p br { display: none; }
-	}
+	[about] { pointer-events: none; }
 	
 	[off] {
 		border: 0;
@@ -202,11 +157,55 @@
 		width: 1px;
 	}
 	
+	[unselectable] {
+		-webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		   -khtml-user-select: none;
+ 		     -khtml-user-drag: none;
+		     -moz-user-select: none;
+		      -ms-user-select: none;
+		          user-select: none;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		-webkit-tap-highlight-color: transparent;
+		outline-style: none;
+	}
+	[unselectable]::webkit-selection { background-color: transparent; }
+	[unselectable]::-moz-selection { background-color: transparent; }
+	[unselectable]::selection { background-color: transparent; }
+	
+	p {
+		font-size: 2rem;
+		line-height: 1.2;
+		text-align: center;
+		background: #fff;
+		width: 80%;
+		margin: 0;
+		padding: 1rem 1.5rem;
+		border-radius: .5rem;
+		position: absolute;
+		bottom: 4rem;
+		left: 50%;
+		pointer-events: none;
+		-webkit-transform: translateX(-50%);
+		   -moz-transform: translateX(-50%);
+		    -ms-transform: translateX(-50%);
+		     -o-transform: translateX(-50%);
+		        transform: translateX(-50%);
+	}
+	p b { font-size: 2.6rem; }
+	
+	@media all and (min-width: 48em) {
+		p { width: auto; }
+	}
+	@media all and (max-width: 48em) {
+		p br { display: none; }
+	}
+	
 </style>
 </head>
 <body>
 
-<div about off>
+<div about off unselectable>
 	<span>Agency</span> Name Generator,
 	<span>Animal</span> Name Generator,
 	<span>Baby</span> Name Generator,
@@ -227,6 +226,7 @@
 	<span>Modern</span> Name Generator,
 	<span>Quick</span> Name Generator,
 	<span>Random</span> Name Generator,
+	<span>Rapper</span> Name Generator,
 	<span>Repo</span> Name Generator,
 	<span>Rock Band</span> Name Generator,
 	<span>Rock Star</span> Name Generator,
@@ -238,11 +238,13 @@
 	<span>Wikipedia</span> Name Generator
 </div>
 
-<div number fade><span center></span></div>
+<div number unselectable fade><span center></span></div>
 
 <div result center fade="visible"></div>
 
 <ol history center fade></ol>
+
+<p unselectable fade></p>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
@@ -332,7 +334,7 @@
 							+
 							word
 							+
-							'</a> '
+							'</a>\n'
 						);
 					
 					domain += word;
@@ -341,7 +343,7 @@
 				
 				domain = domain.toLowerCase().alphaNumeric() + '.com';
 				
-				$result.append('<a href="https://whois.icann.org/en/lookup?name=' + domain + '" target="_blank">' + domain + '</a>');
+				$result.append('<a unselectable href="https://whois.icann.org/en/lookup?name=' + domain + '" target="_blank">' + domain + '</a>');
 				
 				if (Cookies.get(name)) {
 					
@@ -496,14 +498,14 @@
 	$(function() {
 		
 		var $about = $('[about]');
-		var $p = $('<p fade />');
+		var $p = $('p');
 		var html = [
 			'<b><span>Random</span> Name Generator!</b>',
-			'<br>',
+			'<br>\n',
 			'Type a number between 1 and 5 …',
-			'<br>',
+			'<br>\n',
 			'type “h” for a brief history.',
-			'<br>',
+			'<br>\n',
 			'Select all to copy your new name!'
 		].join('');
 		
