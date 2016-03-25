@@ -93,6 +93,18 @@
 			top: 25% !important;
 		}
 	}
+	[result] a:last-child {
+		font-size: 2rem;
+		text-transform: lowercase;
+		display: block;
+		margin-top: 1rem;
+		-webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		   -khtml-user-select: none;
+		     -moz-user-select: none;
+		      -ms-user-select: none;
+		          user-select: none;
+	}
 	
 	[center] {
 		position: absolute;
@@ -125,6 +137,7 @@
 	[history] {
 		font-size: 2rem;
 		text-align: center;
+		line-height: 1;
 		list-style-type: none;
 	}
 	[history],
@@ -132,9 +145,8 @@
 		margin: 0;
 		padding: 0;
 	}
-	[history] li {
-		margin-bottom: 1rem;
-	}
+	[history] li { margin-bottom: 1rem; }
+	[history] li:last-child { margin-bottom: 0; }
 	
 	p {
 		font-size: 2rem;
@@ -153,7 +165,6 @@
 			-ms-transform: translateX(-50%);
 			 -o-transform: translateX(-50%);
 				transform: translateX(-50%);
-		pointer-events: none;
 		-webkit-touch-callout: none;
 		  -webkit-user-select: none;
 		   -khtml-user-select: none;
@@ -229,8 +240,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
 <script>
 	
-	String.prototype.capitalize = function() {
-		return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	if (typeof String.prototype.capitalize != 'function') {
+		String.prototype.capitalize = function() {
+			return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		}
+	}
+	
+	if (typeof String.prototype.alphaNumeric != 'function') {
+		String.prototype.alphaNumeric = function() {
+			return this.replace(/[^a-z0-9]/gi, '');
+		}
 	}
 	
 	$(function() {
@@ -267,6 +286,7 @@
 				
 				var cookie = { history: [] };
 				var temp = [];
+				var domain = '';
 				
 				$.each(data.query.pages, function(key, page) {
 					
@@ -307,7 +327,13 @@
 							'</a> '
 						);
 					
+					domain += word;
+					
 				});
+				
+				domain = domain.toLowerCase().alphaNumeric() + '.com';
+				
+				$result.append('<a href="https://whois.icann.org/en/lookup?name=' + domain + '" target="_blank">' + domain + '</a>');
 				
 				if (Cookies.get(name)) {
 					
