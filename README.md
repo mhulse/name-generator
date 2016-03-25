@@ -1,4 +1,4 @@
-# [Name Generator](https://mhulse.github.io/name-generator)
+# [Name Generator](http://gen.mky.io)
 
 **Random Name Generator courtesy of [Wikipedia](https://www.wikipedia.org/).**
 
