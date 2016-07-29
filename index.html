@@ -193,11 +193,27 @@
 	}
 	[language]:focus { outline:none; }
 	
+	[unselectable] {
+	-webkit-touch-callout: none;
+	  -webkit-user-select: none;
+	   -khtml-user-select: none;
+	     -khtml-user-drag: none;
+	     -moz-user-select: none;
+	      -ms-user-select: none;
+	          user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
+	outline-style: none;
+	}
+	[unselectable]::webkit-selection { background-color: transparent; }
+	[unselectable]::-moz-selection { background-color: transparent; }
+	[unselectable]::selection { background-color: transparent; }
+	
 </style>
 </head>
 <body>
 
-<div about off>
+<div about off unselectable>
 	<span>Agency</span> Name Generator,
 	<span>Animal</span> Name Generator,
 	<span>Baby</span> Name Generator,
