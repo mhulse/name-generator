@@ -85,7 +85,7 @@
 	@media all and (max-width: 48em) {
 		[result] { top: 30% !important; }
 	}
-	[result] a:last-child {
+	[result] a[whois] {
 		font-size: 2rem;
 		text-transform: lowercase;
 		display: block;
@@ -157,22 +157,6 @@
 		width: 1px;
 	}
 	
-	[unselectable] {
-		-webkit-touch-callout: none;
-		  -webkit-user-select: none;
-		   -khtml-user-select: none;
- 		     -khtml-user-drag: none;
-		     -moz-user-select: none;
-		      -ms-user-select: none;
-		          user-select: none;
-		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-		-webkit-tap-highlight-color: transparent;
-		outline-style: none;
-	}
-	[unselectable]::webkit-selection { background-color: transparent; }
-	[unselectable]::-moz-selection { background-color: transparent; }
-	[unselectable]::selection { background-color: transparent; }
-	
 	p {
 		font-size: 2rem;
 		line-height: 1.2;
@@ -183,9 +167,8 @@
 		padding: 1rem 1.5rem;
 		border-radius: .5rem;
 		position: absolute;
-		bottom: 4rem;
+		bottom: 7rem;
 		left: 50%;
-		pointer-events: none;
 		-webkit-transform: translateX(-50%);
 		   -moz-transform: translateX(-50%);
 		    -ms-transform: translateX(-50%);
@@ -201,11 +184,20 @@
 		p br { display: none; }
 	}
 	
+	[language] {
+		font-size: 1.6rem;
+		width: 100%;
+		position: absolute;
+		bottom: -3rem;
+		left: 0;
+	}
+	[language]:focus { outline:none; }
+	
 </style>
 </head>
 <body>
 
-<div about off unselectable>
+<div about off>
 	<span>Agency</span> Name Generator,
 	<span>Animal</span> Name Generator,
 	<span>Baby</span> Name Generator,
@@ -238,13 +230,13 @@
 	<span>Wikipedia</span> Name Generator
 </div>
 
-<div number unselectable fade><span center></span></div>
+<div number fade><span center></span></div>
 
 <div result center fade="visible"></div>
 
 <ol history center fade></ol>
 
-<p unselectable fade></p>
+<p fade></p>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
@@ -264,6 +256,96 @@
 	
 	$(function() {
 		
+		var $about = $('[about]');
+		var $p = $('p');
+		var $select = $([
+			'<select language>',
+				'<option value="ar">العربية</option>',
+				'<option value="az">Azərbaycanca</option>',
+				'<option value="bg">Български</option>',
+				'<option value="nan">Bân-lâm-gú / Hō-ló-oē</option>',
+				'<option value="be">Беларуская (Акадэмічная)</option>',
+				'<option value="ca">Català</option>',
+				'<option value="cs">Čeština</option>',
+				'<option value="da">Dansk</option>',
+				'<option value="de">Deutsch</option>',
+				'<option value="et">Eesti</option>',
+				'<option value="el">Ελληνικά</option>',
+				'<option value="en" selected=selected>English</option>',
+				'<option value="es">Español</option>',
+				'<option value="eo">Esperanto</option>',
+				'<option value="eu">Euskara</option>',
+				'<option value="fa">فارسی</option>',
+				'<option value="fr">Français</option>',
+				'<option value="gl">Galego</option>',
+				'<option value="ko">한국어</option>',
+				'<option value="hy">Հայերեն</option>',
+				'<option value="hi">हिन्दी</option>',
+				'<option value="hr">Hrvatski</option>',
+				'<option value="id">Bahasa Indonesia</option>',
+				'<option value="it">Italiano</option>',
+				'<option value="he">עברית</option>',
+				'<option value="ka">ქართული</option>',
+				'<option value="la">Latina</option>',
+				'<option value="lt">Lietuvių</option>',
+				'<option value="hu">Magyar</option>',
+				'<option value="ms">Bahasa Melayu</option>',
+				'<option value="min">Bahaso Minangkabau</option>',
+				'<option value="nl">Nederlands</option>',
+				'<option value="ja">日本語</option>',
+				'<option value="no">Norsk (Bokmål)</option>',
+				'<option value="nn">Norsk (Nynorsk)</option>',
+				'<option value="ce">Нохчийн</option>',
+				'<option value="uz">Oʻzbekcha / Ўзбекча</option>',
+				'<option value="pl">Polski</option>',
+				'<option value="pt">Português</option>',
+				'<option value="kk">Қазақша / Qazaqşa / قازاقشا</option>',
+				'<option value="ro">Română</option>',
+				'<option value="ru">Русский</option>',
+				'<option value="simple">Simple English</option>',
+				'<option value="ceb">Sinugboanong Binisaya</option>',
+				'<option value="sk">Slovenčina</option>',
+				'<option value="sl">Slovenščina</option>',
+				'<option value="sr">Српски / Srpski</option>',
+				'<option value="sh">Srpskohrvatski / Српскохрватски</option>',
+				'<option value="fi">Suomi</option>',
+				'<option value="sv">Svenska</option>',
+				'<option value="th">ภาษาไทย</option>',
+				'<option value="tr">Türkçe</option>',
+				'<option value="uk">Українська</option>',
+				'<option value="ur">اردو</option>',
+				'<option value="vi">Tiếng Việt</option>',
+				'<option value="vo">Volapük</option>',
+				'<option value="war">Winaray</option>',
+				'<option value="zh">中文</option>',
+			'</select>'
+		].join(''));
+		var html = [
+			'<b><span>Random</span> Name Generator!</b>',
+			'<br>\n',
+			'Type a number between 1 and 5 …',
+			'<br>\n',
+			'type “h” for a brief history.'
+		].join('');
+		
+		$p
+			.appendTo('body')
+			.html(html)
+			.find('span')
+			.text($('span:nth-child(' + Math.floor((Math.random() * $about.children('span').length) + 1 ) + ')', $about).text());
+			
+		$select.appendTo($p);
+		
+		$(window).load(function() {
+			
+			$p.attr('fade', 'visible');
+			
+		});
+		
+	});
+	
+	$(function() {
+		
 		'use strict';
 		
 		var $history = $('[history]');
@@ -275,6 +357,7 @@
 		var pages = [];
 		var flag = 0;
 		var name = 'mashup';
+		var lang = 'en'; // Defaults to English.
 		
 		var number = function() {
 			
@@ -292,7 +375,7 @@
 		
 		var wiki = function() {
 			
-			$.getJSON('https://en.wikipedia.org/w/api.php?format=json&action=query&generator=random&grnnamespace=0&grnlimit=' + total + '&callback=?', function(data) {
+			$.getJSON('https://' + lang + '.wikipedia.org/w/api.php?format=json&action=query&generator=random&grnnamespace=0&grnlimit=' + total + '&callback=?', function(data) {
 				
 				var cookie = { history: [] };
 				var temp = [];
@@ -302,7 +385,7 @@
 					
 					var title = page.title.capitalize();
 					var word;
-					var uri = 'http://en.wikipedia.org/?curid=';
+					var uri = 'http://' + lang + '.wikipedia.org/?curid=';
 					var find = ['(', ')', '-', ',', '.', '"', 'Disambiguation', ':', '–', '&'];
 					var i;
 					var l;
@@ -343,7 +426,11 @@
 				
 				domain = domain.toLowerCase().alphaNumeric() + '.com';
 				
-				$result.append('<a unselectable href="https://whois.icann.org/en/lookup?name=' + domain + '" target="_blank">' + domain + '</a>');
+				if (domain.length > 4) {
+					
+					$result.append('<a whois href="https://whois.icann.org/en/lookup?name=' + domain + '" target="_blank">' + domain + '</a>');
+					
+				}
 				
 				if (Cookies.get(name)) {
 					
@@ -493,31 +580,13 @@
 			
 		});
 		
-	});
-	
-	$(function() {
-		
-		var $about = $('[about]');
-		var $p = $('p');
-		var html = [
-			'<b><span>Random</span> Name Generator!</b>',
-			'<br>\n',
-			'Type a number between 1 and 5 …',
-			'<br>\n',
-			'type “h” for a brief history.',
-			'<br>\n',
-			'Select all to copy your new name!'
-		].join('');
-		
-		$p
-			.appendTo('body')
-			.html(html)
-			.find('span')
-			.text($('span:nth-child(' + Math.floor((Math.random() * $about.children('span').length) + 1 ) + ')', $about).text());
-		
-		$(window).load(function() {
+		$('[language]').change(function() {
 			
-			$p.attr('fade', 'visible');
+			$this = $(this);
+			
+			lang = $this.val();
+			
+			$this.blur(); // Does not seem to work (and not time to fix). :(
 			
 		});
 		
